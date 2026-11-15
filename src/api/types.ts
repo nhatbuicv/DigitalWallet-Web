@@ -1,4 +1,4 @@
-import type { components } from './schema'
+import type { components, operations } from './schema'
 
 /** Generic envelope returned by every backend endpoint. */
 export interface ApiResponse<T> {
@@ -64,4 +64,8 @@ export type WalletStatus = NonNullable<Schemas['WalletResponse']['status']>
 export type TransactionType = NonNullable<Schemas['TransactionDetailResponse']['type']>
 export type TransactionStatus = NonNullable<Schemas['TransactionDetailResponse']['status']>
 export type LedgerEntryType = NonNullable<Schemas['LedgerEntryAdminResponse']['entryType']>
+export type EntryType = LedgerEntryType
+export type UserStatus = NonNullable<operations['getUsers']['parameters']['query']['status']>
+export type UserRole = NonNullable<operations['getUsers']['parameters']['query']['role']>
+export type AuditAction = NonNullable<Schemas['AuditLogResponse']['action']>
 export type ClientType = Schemas['PasswordLoginRequest']['clientType']
