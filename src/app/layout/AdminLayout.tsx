@@ -55,7 +55,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const location = useLocation()
   const navigate = useNavigate()
   const user = useAuthStore((s) => s.user)
-  const clearAuth = useAuthStore((s) => s.clear)
+  const clearSession = useAuthStore((s) => s.clearSession)
 
   const selectedKey = getSelectedMenuKey(location.pathname)
 
@@ -94,13 +94,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       label: 'Đăng xuất',
       danger: true,
       onClick: () => {
-        clearAuth()
+        clearSession()
         navigate('/login', { replace: true })
       },
     },
   ]
 
-  const displayName = user?.fullName || user?.email || 'Quản trị viên'
+  const displayName = user?.fullName || user?.phone || 'Quản trị viên'
   const displayRole = user?.role || 'ADMIN'
 
   return (
