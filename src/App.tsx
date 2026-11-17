@@ -10,6 +10,8 @@ import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PlaceholderPage } from '@/pages/PlaceholderPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
+import { UserDetailPage } from '@/pages/UserDetailPage'
+import { UsersPage } from '@/pages/UsersPage'
 
 export function AppRoutes() {
   return (
@@ -24,8 +26,8 @@ export function AppRoutes() {
           <Route element={<AdminLayout />}>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/users" element={<PlaceholderPage title="Người dùng" />} />
-            <Route path="/users/:id" element={<PlaceholderPage title="Chi tiết người dùng" />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/users/:uid" element={<UserDetailPage />} />
             <Route path="/wallets" element={<PlaceholderPage title="Ví điện tử" />} />
             <Route path="/wallets/:id" element={<PlaceholderPage title="Chi tiết ví điện tử" />} />
             <Route path="/transactions" element={<PlaceholderPage title="Giao dịch" />} />
