@@ -1,7 +1,7 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons'
 import { Alert, Button, Card, Form, Input, Typography } from 'antd'
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { apiClient, unwrapResponse } from '@/api/client'
 import { AppError, normalizeError } from '@/api/errorHandler'
 import type { ApiResponse, PasswordLoginRequest, UserLoginResponse } from '@/api/types'
@@ -164,11 +164,15 @@ export function LoginPage() {
             />
           </Form.Item>
 
-          <Form.Item style={{ marginBottom: 0, marginTop: 8 }}>
+          <Form.Item style={{ marginBottom: 12, marginTop: 8 }}>
             <Button type="primary" htmlType="submit" block loading={submitting}>
               Đăng nhập
             </Button>
           </Form.Item>
+
+          <div style={{ textAlign: 'right' }}>
+            <Link to="/forgot-password">Quên mật khẩu?</Link>
+          </div>
         </Form>
       </Card>
     </div>

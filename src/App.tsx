@@ -3,14 +3,18 @@ import { ProtectedRoute } from '@/app/guards/ProtectedRoute'
 import { RoleGuard } from '@/app/guards/RoleGuard'
 import { AdminLayout } from '@/app/layout/AdminLayout'
 import { ForbiddenPage } from '@/pages/ForbiddenPage'
+import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PlaceholderPage } from '@/pages/PlaceholderPage'
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/403" element={<ForbiddenPage />} />
 
       <Route element={<ProtectedRoute />}>
