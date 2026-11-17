@@ -10,6 +10,8 @@ import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PlaceholderPage } from '@/pages/PlaceholderPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
+import { TransactionDetailPage } from '@/pages/TransactionDetailPage'
+import { TransactionsPage } from '@/pages/TransactionsPage'
 import { UserDetailPage } from '@/pages/UserDetailPage'
 import { UsersPage } from '@/pages/UsersPage'
 import { WalletDetailPage } from '@/pages/WalletDetailPage'
@@ -32,11 +34,8 @@ export function AppRoutes() {
             <Route path="/users/:uid" element={<UserDetailPage />} />
             <Route path="/wallets" element={<WalletsPage />} />
             <Route path="/wallets/:walletUid" element={<WalletDetailPage />} />
-            <Route path="/transactions" element={<PlaceholderPage title="Giao dịch" />} />
-            <Route
-              path="/transactions/:id"
-              element={<PlaceholderPage title="Chi tiết giao dịch" />}
-            />
+            <Route path="/transactions" element={<TransactionsPage />} />
+            <Route path="/transactions/:id" element={<TransactionDetailPage />} />
             <Route path="/profile" element={<ProfilePage />} />
 
             <Route element={<RoleGuard allowedRoles={['ADMIN', 'MANAGER']} />}>
