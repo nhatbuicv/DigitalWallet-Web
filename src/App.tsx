@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from '@/app/guards/ProtectedRoute'
 import { RoleGuard } from '@/app/guards/RoleGuard'
 import { AdminLayout } from '@/app/layout/AdminLayout'
+import { DashboardPage } from '@/pages/DashboardPage'
 import { ForbiddenPage } from '@/pages/ForbiddenPage'
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { LoginPage } from '@/pages/LoginPage'
@@ -21,8 +22,8 @@ export function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route element={<RoleGuard allowedRoles={['ADMIN', 'MANAGER', 'STAFF']} />}>
           <Route element={<AdminLayout />}>
-            <Route path="/" element={<PlaceholderPage title="Tổng quan" />} />
-            <Route path="/dashboard" element={<PlaceholderPage title="Tổng quan" />} />
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/users" element={<PlaceholderPage title="Người dùng" />} />
             <Route path="/users/:id" element={<PlaceholderPage title="Chi tiết người dùng" />} />
             <Route path="/wallets" element={<PlaceholderPage title="Ví điện tử" />} />

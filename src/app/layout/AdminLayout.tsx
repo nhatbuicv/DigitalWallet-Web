@@ -169,14 +169,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             padding: collapsed ? '0 8px' : '0 20px',
             color: '#fff',
             fontWeight: 700,
-            fontSize: 16,
+            fontSize: 15,
             letterSpacing: 0.3,
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
           }}
         >
-          {collapsed ? 'DW' : 'Digital Wallet'}
+          {collapsed ? 'WLS' : 'Wallet Ledger Service'}
         </div>
 
         <Menu
