@@ -13,7 +13,10 @@ import { Avatar, Breadcrumb, Button, Dropdown, Layout, Menu, Space, Typography }
 import type { MenuProps } from 'antd'
 import { useMemo, useState, type ReactNode } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { apiClient } from '@/api/client'
+import type { RefreshTokenRequest, UserRole } from '@/api/types'
 import { StatusTag } from '@/components/StatusTag'
+import { decodeJwt } from '@/lib/jwt'
 import { useAuthStore } from '@/stores/authStore'
 
 const { Header, Sider, Content } = Layout
@@ -22,6 +25,7 @@ interface NavItem {
   key: string
   label: string
   icon: ReactNode
+  roles?: UserRole[]
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -29,7 +33,12 @@ const NAV_ITEMS: NavItem[] = [
   { key: '/users', label: 'Người dùng', icon: <TeamOutlined /> },
   { key: '/wallets', label: 'Ví điện tử', icon: <WalletOutlined /> },
   { key: '/transactions', label: 'Giao dịch', icon: <SwapOutlined /> },
-  { key: '/audit-logs', label: 'Nhật ký kiểm toán', icon: <AuditOutlined /> },
+  {
+    key: '/audit-logs',
+    label: 'Nhật ký kiểm toán',
+    icon: <AuditOutlined />,
+    roles: ['ADMIN', 'MANAGER'],
+  },
 ]
 
 const ROUTE_LABELS: Record<string, string> = {
@@ -52,12 +61,42 @@ export interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const [collapsed, setCollapsed] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const user = useAuthStore((s) => s.user)
+  const accessToken = useAuthStore((s) => s.accessToken)
+  const refreshToken = useAuthStore((s) => s.refreshToken)
   const clearSession = useAuthStore((s) => s.clearSession)
 
+  const currentRole = user?.role ?? decodeJwt(accessToken)?.role
   const selectedKey = getSelectedMenuKey(location.pathname)
+
+  const visibleNavItems = useMemo(
+    () =>
+      NAV_ITEMS.filter((item) =>
+        item.roles ? Boolean(currentRole && item.roles.includes(currentRole)) : true,
+      ),
+    [currentRole],
+  )
+
+  const handleLogout = async () => {
+    if (loggingOut) return
+    setLoggingOut(true)
+    try {
+      if (refreshToken) {
+        await apiClient.post('/auth/logout', {
+          refreshToken,
+        } satisfies RefreshTokenRequest)
+      }
+    } catch {
+      // Still clear local session even if the server logout request fails
+    } finally {
+      clearSession()
+      navigate('/login', { replace: true })
+      setLoggingOut(false)
+    }
+  }
 
   const breadcrumbItems = useMemo(() => {
     const segments = location.pathname.split('/').filter(Boolean)
@@ -93,9 +132,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       icon: <LogoutOutlined />,
       label: 'Đăng xuất',
       danger: true,
+      disabled: loggingOut,
       onClick: () => {
-        clearSession()
-        navigate('/login', { replace: true })
+        void handleLogout()
       },
     },
   ]
@@ -143,7 +182,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           theme="dark"
           mode="inline"
           selectedKeys={[selectedKey]}
-          items={NAV_ITEMS.map((item) => ({
+          items={visibleNavItems.map((item) => ({
             key: item.key,
             icon: item.icon,
             label: item.label,
