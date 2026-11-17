@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { MemoryRouter } from 'react-router-dom'
@@ -47,15 +48,20 @@ describe('RBAC route guards and router', () => {
   })
 
   async function renderRoute(initialEntry: string) {
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    })
     container = document.createElement('div')
     document.body.appendChild(container)
     root = createRoot(container)
 
     await act(async () => {
       root?.render(
-        <MemoryRouter initialEntries={[initialEntry]}>
-          <AppRoutes />
-        </MemoryRouter>,
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter initialEntries={[initialEntry]}>
+            <AppRoutes />
+          </MemoryRouter>
+        </QueryClientProvider>,
       )
     })
 

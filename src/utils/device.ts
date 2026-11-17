@@ -68,12 +68,12 @@ function detectOs(ua: string): string {
  */
 export function getDeviceName(): string {
   if (typeof navigator === 'undefined') {
-    return 'Digital Wallet Admin Web'
+    return 'Wallet Ledger Service Admin Web'
   }
 
   const ua = navigator.userAgent?.trim() ?? ''
   if (!ua) {
-    return 'Digital Wallet Admin Web'
+    return 'Wallet Ledger Service Admin Web'
   }
 
   const label = `${detectBrowser(ua)} on ${detectOs(ua)}`.trim()

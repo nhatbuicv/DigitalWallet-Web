@@ -122,7 +122,9 @@ export function LoginPage() {
           <Typography.Title level={3} style={{ marginBottom: 4 }}>
             Đăng nhập Quản trị
           </Typography.Title>
-          <Typography.Text type="secondary">Hệ thống quản trị Digital Wallet</Typography.Text>
+          <Typography.Text type="secondary">
+            Hệ thống quản trị Wallet Ledger Service
+          </Typography.Text>
         </div>
 
         {errorMessage && (
