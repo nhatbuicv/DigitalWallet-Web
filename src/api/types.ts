@@ -60,6 +60,7 @@ export type AuditLogResponse = Schemas['AuditLogResponse']
 // ---- Enums (derived from the schema's string unions) ----
 export type WalletType = NonNullable<Schemas['CreateWalletRequest']['walletType']>
 export type Currency = NonNullable<Schemas['WalletResponse']['currency']>
+export type CurrencyCode = Currency
 export type WalletStatus = NonNullable<Schemas['WalletResponse']['status']>
 export type TransactionType = NonNullable<Schemas['TransactionDetailResponse']['type']>
 export type TransactionStatus = NonNullable<Schemas['TransactionDetailResponse']['status']>
@@ -68,4 +69,5 @@ export type EntryType = LedgerEntryType
 export type UserStatus = NonNullable<operations['getUsers']['parameters']['query']['status']>
 export type UserRole = NonNullable<operations['getUsers']['parameters']['query']['role']>
 export type AuditAction = NonNullable<Schemas['AuditLogResponse']['action']>
+export type AuditTargetType = NonNullable<Schemas['AuditLogResponse']['targetType']>
 export type ClientType = Schemas['PasswordLoginRequest']['clientType']
