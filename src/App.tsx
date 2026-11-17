@@ -12,6 +12,8 @@ import { ProfilePage } from '@/pages/ProfilePage'
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
 import { UserDetailPage } from '@/pages/UserDetailPage'
 import { UsersPage } from '@/pages/UsersPage'
+import { WalletDetailPage } from '@/pages/WalletDetailPage'
+import { WalletsPage } from '@/pages/WalletsPage'
 
 export function AppRoutes() {
   return (
@@ -28,8 +30,8 @@ export function AppRoutes() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/users/:uid" element={<UserDetailPage />} />
-            <Route path="/wallets" element={<PlaceholderPage title="Ví điện tử" />} />
-            <Route path="/wallets/:id" element={<PlaceholderPage title="Chi tiết ví điện tử" />} />
+            <Route path="/wallets" element={<WalletsPage />} />
+            <Route path="/wallets/:walletUid" element={<WalletDetailPage />} />
             <Route path="/transactions" element={<PlaceholderPage title="Giao dịch" />} />
             <Route
               path="/transactions/:id"
