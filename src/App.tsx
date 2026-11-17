@@ -7,6 +7,7 @@ import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PlaceholderPage } from '@/pages/PlaceholderPage'
+import { ProfilePage } from '@/pages/ProfilePage'
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
 
 export function AppRoutes() {
@@ -31,7 +32,7 @@ export function AppRoutes() {
               path="/transactions/:id"
               element={<PlaceholderPage title="Chi tiết giao dịch" />}
             />
-            <Route path="/profile" element={<PlaceholderPage title="Hồ sơ cá nhân" />} />
+            <Route path="/profile" element={<ProfilePage />} />
 
             <Route element={<RoleGuard allowedRoles={['ADMIN', 'MANAGER']} />}>
               <Route path="/audit-logs" element={<PlaceholderPage title="Nhật ký kiểm toán" />} />
