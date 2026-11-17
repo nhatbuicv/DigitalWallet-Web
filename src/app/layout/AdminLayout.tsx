@@ -42,6 +42,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const ROUTE_LABELS: Record<string, string> = {
+  dashboard: 'Tổng quan',
   users: 'Người dùng',
   wallets: 'Ví điện tử',
   transactions: 'Giao dịch',
@@ -50,7 +51,7 @@ const ROUTE_LABELS: Record<string, string> = {
 }
 
 function getSelectedMenuKey(pathname: string): string {
-  if (pathname === '/') return '/'
+  if (pathname === '/' || pathname === '/dashboard') return '/'
   const match = NAV_ITEMS.find((item) => item.key !== '/' && pathname.startsWith(item.key))
   return match?.key ?? '/'
 }
