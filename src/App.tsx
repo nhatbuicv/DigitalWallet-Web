@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from '@/app/guards/ProtectedRoute'
 import { RoleGuard } from '@/app/guards/RoleGuard'
 import { AdminLayout } from '@/app/layout/AdminLayout'
+import { AuditLogsPage } from '@/pages/AuditLogsPage'
 import { DashboardPage } from '@/pages/DashboardPage'
 import { ForbiddenPage } from '@/pages/ForbiddenPage'
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
-import { PlaceholderPage } from '@/pages/PlaceholderPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
 import { TransactionDetailPage } from '@/pages/TransactionDetailPage'
@@ -39,7 +39,7 @@ export function AppRoutes() {
             <Route path="/profile" element={<ProfilePage />} />
 
             <Route element={<RoleGuard allowedRoles={['ADMIN', 'MANAGER']} />}>
-              <Route path="/audit-logs" element={<PlaceholderPage title="Nhật ký kiểm toán" />} />
+              <Route path="/audit-logs" element={<AuditLogsPage />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />
